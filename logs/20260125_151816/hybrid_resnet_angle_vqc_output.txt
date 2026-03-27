@@ -1,0 +1,2 @@
+Running Experiment: hybrid_resnet_angle_vqc
+Device: cuda

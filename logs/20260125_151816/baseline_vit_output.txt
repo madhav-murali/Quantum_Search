@@ -1,0 +1,2 @@
+Running Experiment: baseline_vit
+Device: cuda

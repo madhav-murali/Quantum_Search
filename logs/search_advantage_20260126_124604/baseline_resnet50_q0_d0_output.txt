@@ -1,0 +1,12 @@
+Running Experiment: baseline_resnet50
+Device: cuda
+Epoch 1/10 - Loss: 0.5652 - Accuracy: 0.8302 - Time: 30.91s
+Epoch 2/10 - Loss: 0.2707 - Accuracy: 0.8667 - Time: 25.89s
+Epoch 3/10 - Loss: 0.2028 - Accuracy: 0.9290 - Time: 25.75s
+Epoch 4/10 - Loss: 0.1509 - Accuracy: 0.8895 - Time: 24.55s
+Epoch 5/10 - Loss: 0.1084 - Accuracy: 0.9037 - Time: 24.24s
+Epoch 6/10 - Loss: 0.0958 - Accuracy: 0.9136 - Time: 23.96s
+Epoch 7/10 - Loss: 0.0829 - Accuracy: 0.9358 - Time: 23.98s
+Epoch 8/10 - Loss: 0.0830 - Accuracy: 0.9444 - Time: 24.08s
+Epoch 9/10 - Loss: 0.0691 - Accuracy: 0.9389 - Time: 24.14s
+Epoch 10/10 - Loss: 0.0679 - Accuracy: 0.9611 - Time: 23.73s

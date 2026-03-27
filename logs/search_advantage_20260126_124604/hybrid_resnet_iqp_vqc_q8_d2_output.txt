@@ -1,0 +1,12 @@
+Running Experiment: hybrid_resnet_iqp_vqc
+Device: cuda
+Epoch 1/10 - Loss: 2.2648 - Accuracy: 0.2191 - Time: 85.55s
+Epoch 2/10 - Loss: 2.2711 - Accuracy: 0.0926 - Time: 83.73s
+Epoch 3/10 - Loss: 2.2965 - Accuracy: 0.1222 - Time: 82.55s
+Epoch 4/10 - Loss: 2.2957 - Accuracy: 0.0920 - Time: 82.70s
+Epoch 5/10 - Loss: 2.2961 - Accuracy: 0.1537 - Time: 82.81s
+Epoch 6/10 - Loss: 2.2950 - Accuracy: 0.1068 - Time: 84.10s
+Epoch 7/10 - Loss: 2.2959 - Accuracy: 0.0815 - Time: 86.06s
+Epoch 8/10 - Loss: 2.2925 - Accuracy: 0.1809 - Time: 82.52s
+Epoch 9/10 - Loss: 2.2927 - Accuracy: 0.1414 - Time: 85.58s
+Epoch 10/10 - Loss: 2.2903 - Accuracy: 0.0901 - Time: 84.74s

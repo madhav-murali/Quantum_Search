@@ -1,0 +1,20 @@
+# Core ML
+torch>=2.0.0
+torchvision
+torchgeo
+pennylane
+transformers
+timm
+scikit-learn
+matplotlib
+pandas
+numpy
+
+# MLOps
+boto3
+dvc[s3]
+python-dotenv
+
+# Dev / CI
+flake8
+pytest

@@ -1,0 +1,44 @@
+{
+  "source_metrics": {
+    "val_acc": 0.941358024691358,
+    "val_f1": 0.9393405644065149,
+    "test_acc": 0.9444444444444444,
+    "test_f1": 0.9418604401001275
+  },
+  "source_config": {
+    "backbone": "resnet50",
+    "encoding": "amplitude",
+    "ansatz": "vqc",
+    "q_type": "standard",
+    "n_qubits": 8,
+    "q_depth": 2,
+    "standard_dim": 256,
+    "n_classes": 10,
+    "in_channels": 3
+  },
+  "target_config": {
+    "backbone": "lenet_improved",
+    "encoding": "amplitude",
+    "ansatz": "vqc",
+    "q_type": "standard",
+    "n_qubits": 8,
+    "q_depth": 2,
+    "standard_dim": 256,
+    "n_classes": 10,
+    "in_channels": 3
+  },
+  "extended_transfer": [
+    "quantum_layer",
+    "classifier",
+    "projector_bias"
+  ],
+  "strategies": {
+    "distilled": {
+      "best_acc": 0.9185185185185185,
+      "best_f1": 0.9163074716442127,
+      "total_params": 2225546,
+      "trainable_params": 2225546,
+      "avg_epoch_time": 77.4778024673462
+    }
+  }
+}

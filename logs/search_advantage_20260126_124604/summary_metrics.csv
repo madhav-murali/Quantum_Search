@@ -1,0 +1,9 @@
+Configuration,Best Accuracy,Final Accuracy,Best F1,Best AUC,Final Loss,Avg Epoch Time (s)
+baseline_resnet50_q0_d0,0.9611,0.9611,,,0.0679,25.122999999999998
+hybrid_resnet_amplitude_vqc_q8_d2,0.942,0.8883,,,0.6508,55.685
+hybrid_resnet_amplitude_vqc_q8_d3,0.929,0.929,,,0.6916,67.171
+baseline_vit_q0_d0,0.9086,0.9086,,,0.243,254.686
+hybrid_resnet_angle_vqc_q8_d2,0.4975,0.2475,,,2.0524,61.011
+hybrid_vit_qlstm_q4_d2,0.2284,0.2235,,,1.906,415.412
+hybrid_resnet_iqp_vqc_q8_d2,0.2191,0.0901,,,2.2903,84.034
+hybrid_vit_iqp_qaoa_q4_d2,0.1346,0.0599,,,2.2987,490.139

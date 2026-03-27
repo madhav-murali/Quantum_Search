@@ -1,0 +1,7 @@
+[core]
+    autostage = true
+    remote = s3storage
+['remote "s3storage"']
+    url = s3://quantum-mlops-artifacts/dvc
+['remote "local"']
+    url = /tmp/dvc-cache

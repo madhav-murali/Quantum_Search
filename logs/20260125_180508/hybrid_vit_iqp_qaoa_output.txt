@@ -1,0 +1,2 @@
+Running Experiment: hybrid_vit_iqp_qaoa
+Device: cuda

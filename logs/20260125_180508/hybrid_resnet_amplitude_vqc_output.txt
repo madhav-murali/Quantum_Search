@@ -1,0 +1,7 @@
+Running Experiment: hybrid_resnet_amplitude_vqc
+Device: cuda
+Epoch 1/5 - Loss: 1.9981 - Accuracy: 0.4728 - Time: 37.65s
+Epoch 2/5 - Loss: 1.8721 - Accuracy: 0.4469 - Time: 35.26s
+Epoch 3/5 - Loss: 1.7730 - Accuracy: 0.4481 - Time: 36.03s
+Epoch 4/5 - Loss: 1.6782 - Accuracy: 0.4451 - Time: 36.54s
+Epoch 5/5 - Loss: 1.5886 - Accuracy: 0.5358 - Time: 35.56s

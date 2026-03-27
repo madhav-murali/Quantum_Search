@@ -1,0 +1,2 @@
+Running Experiment: hybrid_vit_qlstm
+Device: cuda

@@ -1,0 +1,152 @@
+name: QTL Training Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'qtl/**'
+      - 'mlops/**'
+      - 'run_experiments.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+    inputs:
+      source_epochs:
+        description: 'Source model training epochs'
+        default: '20'
+        type: string
+      target_epochs:
+        description: 'QTL target training epochs'
+        default: '100'
+        type: string
+      strategies:
+        description: 'QTL strategies (space-separated)'
+        default: 'frozen finetuned distilled scratch'
+        type: string
+      skip_source:
+        description: 'Skip source training (use cached checkpoint)'
+        default: false
+        type: boolean
+
+env:
+  PYTHON_VERSION: '3.10'
+
+jobs:
+  qtl-pipeline:
+    name: QTL Training Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      # ------------------------------------------------------------------
+      # Setup
+      # ------------------------------------------------------------------
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history for git SHA tracking
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install boto3 dvc[s3] python-dotenv
+
+      # ------------------------------------------------------------------
+      # Data (DVC)
+      # ------------------------------------------------------------------
+      - name: Pull data with DVC
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          pip install dvc[s3]
+          dvc pull || echo "DVC pull failed — data may need manual setup"
+
+      # ------------------------------------------------------------------
+      # Cache source checkpoint
+      # ------------------------------------------------------------------
+      - name: Cache source checkpoint
+        uses: actions/cache@v4
+        with:
+          path: checkpoints/qtl_source_resnet_amplitude.pth
+          key: source-checkpoint-${{ hashFiles('src/models/**', 'run_experiments.py') }}
+
+      # ------------------------------------------------------------------
+      # Run QTL Pipeline
+      # ------------------------------------------------------------------
+      - name: Run QTL MLOps Pipeline
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET || 'quantum-mlops-artifacts' }}
+          SOURCE_EPOCHS: ${{ github.event.inputs.source_epochs || '20' }}
+          TARGET_EPOCHS: ${{ github.event.inputs.target_epochs || '100' }}
+        run: |
+          SKIP_FLAG=""
+          if [ "${{ github.event.inputs.skip_source }}" = "true" ]; then
+            SKIP_FLAG="--skip-source"
+          fi
+
+          python -m mlops.train_pipeline \
+            --source-epochs $SOURCE_EPOCHS \
+            --target-epochs $TARGET_EPOCHS \
+            --strategies ${{ github.event.inputs.strategies || 'frozen finetuned distilled scratch' }} \
+            $SKIP_FLAG \
+            --run-name "gha_$(echo $GITHUB_SHA | cut -c1-7)"
+
+      # ------------------------------------------------------------------
+      # Artifacts & Summary
+      # ------------------------------------------------------------------
+      - name: Upload run artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qtl-run-${{ github.sha }}
+          path: |
+            mlops_runs/
+            results/qtl_*
+            results/summary_*
+          retention-days: 30
+
+      - name: Post run report to job summary
+        if: always()
+        run: |
+          # Find the latest run report
+          REPORT=$(find mlops_runs -name "run_report.md" -type f | sort | tail -1)
+          if [ -n "$REPORT" ]; then
+            echo "## 🔬 QTL Pipeline Results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            cat "$REPORT" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ⚠️ No run report found" >> $GITHUB_STEP_SUMMARY
+            echo "Check the pipeline logs for details." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload checkpoints to S3
+        if: success()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          python -c "
+          from mlops.s3_utils import S3Client
+          s3 = S3Client()
+          import os
+          sha = os.environ.get('GITHUB_SHA', 'unknown')[:7]
+          for ckpt in ['checkpoints/qtl_source_resnet_amplitude.pth',
+                       'checkpoints/qtl_source_quantum_weights.pth',
+                       'checkpoints/qtl_source_extended_weights.pth']:
+              if os.path.exists(ckpt):
+                  s3.upload_file(ckpt, f'checkpoints/{sha}/{os.path.basename(ckpt)}')
+                  print(f'Uploaded {ckpt}')
+          " || echo "S3 checkpoint upload failed (non-fatal)"

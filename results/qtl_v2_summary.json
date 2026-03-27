@@ -1,0 +1,44 @@
+{
+  "source_accuracy": 0.941358024691358,
+  "source_config": {
+    "backbone": "resnet50",
+    "encoding": "amplitude",
+    "ansatz": "vqc",
+    "q_type": "standard",
+    "n_qubits": 8,
+    "q_depth": 2,
+    "standard_dim": 256,
+    "n_classes": 10,
+    "in_channels": 3
+  },
+  "strategies": {
+    "frozen": {
+      "best_acc": 0.7246913580246913,
+      "best_f1": 0.7121273990092917,
+      "total_params": 359578,
+      "trainable_params": 359530,
+      "avg_epoch_time": 33.484868097305295
+    },
+    "finetuned": {
+      "best_acc": 0.8135802469135802,
+      "best_f1": 0.8020180558829362,
+      "total_params": 359578,
+      "trainable_params": 359530,
+      "avg_epoch_time": 47.929246234893796
+    },
+    "distilled": {
+      "best_acc": 0.7913580246913581,
+      "best_f1": 0.7810373533671677,
+      "total_params": 359578,
+      "trainable_params": 359578,
+      "avg_epoch_time": 71.5528072309494
+    },
+    "scratch": {
+      "best_acc": 0.5925925925925926,
+      "best_f1": 0.5200234750694288,
+      "total_params": 359578,
+      "trainable_params": 359578,
+      "avg_epoch_time": 407.20363948822023
+    }
+  }
+}

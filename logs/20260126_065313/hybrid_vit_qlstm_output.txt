@@ -1,0 +1,7 @@
+Running Experiment: hybrid_vit_qlstm
+Device: cuda
+Epoch 1/5 - Loss: 2.3113 - Accuracy: 0.1148 - Time: 403.34s
+Epoch 2/5 - Loss: 2.2649 - Accuracy: 0.2272 - Time: 403.21s
+Epoch 3/5 - Loss: 2.1540 - Accuracy: 0.2265 - Time: 405.32s
+Epoch 4/5 - Loss: 2.0452 - Accuracy: 0.2259 - Time: 405.24s
+Epoch 5/5 - Loss: 1.9788 - Accuracy: 0.2593 - Time: 405.57s

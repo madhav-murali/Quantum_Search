@@ -1,0 +1,7 @@
+Running Experiment: baseline_resnet50
+Device: cuda
+Epoch 1/5 - Loss: 0.5887 - Accuracy: 0.7648 - Time: 27.24s
+Epoch 2/5 - Loss: 0.2653 - Accuracy: 0.9253 - Time: 25.21s
+Epoch 3/5 - Loss: 0.1726 - Accuracy: 0.8957 - Time: 24.49s
+Epoch 4/5 - Loss: 0.1300 - Accuracy: 0.9111 - Time: 24.52s
+Epoch 5/5 - Loss: 0.1172 - Accuracy: 0.7772 - Time: 25.22s

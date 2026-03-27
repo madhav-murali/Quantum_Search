@@ -1,0 +1,39 @@
+{
+  "source_metrics": {
+    "val_acc": 0.941358024691358,
+    "val_f1": 0.9393405644065149,
+    "test_acc": 0.9444444444444444,
+    "test_f1": 0.9418604401001275
+  },
+  "source_config": {
+    "backbone": "resnet50",
+    "encoding": "amplitude",
+    "ansatz": "vqc",
+    "q_type": "standard",
+    "n_qubits": 8,
+    "q_depth": 2,
+    "standard_dim": 256,
+    "n_classes": 10,
+    "in_channels": 3
+  },
+  "target_config": {
+    "backbone": "lenet5",
+    "encoding": "amplitude",
+    "ansatz": "vqc",
+    "q_type": "standard",
+    "n_qubits": 8,
+    "q_depth": 2,
+    "standard_dim": 256,
+    "n_classes": 10,
+    "in_channels": 3
+  },
+  "strategies": {
+    "finetuned": {
+      "best_acc": 0.9112345679012346,
+      "best_f1": 0.90105681443081,
+      "total_params": 359578,
+      "trainable_params": 359530,
+      "avg_epoch_time": 50.16750641822815
+    }
+  }
+}

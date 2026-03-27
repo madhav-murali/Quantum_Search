@@ -1,0 +1,12 @@
+Running Experiment: baseline_vit
+Device: cuda
+Epoch 1/10 - Loss: 1.0504 - Accuracy: 0.7259 - Time: 249.82s
+Epoch 2/10 - Loss: 0.6363 - Accuracy: 0.7759 - Time: 250.64s
+Epoch 3/10 - Loss: 0.5185 - Accuracy: 0.8160 - Time: 251.30s
+Epoch 4/10 - Loss: 0.4253 - Accuracy: 0.8605 - Time: 251.06s
+Epoch 5/10 - Loss: 0.3847 - Accuracy: 0.8549 - Time: 251.09s
+Epoch 6/10 - Loss: 0.3429 - Accuracy: 0.8809 - Time: 259.04s
+Epoch 7/10 - Loss: 0.3059 - Accuracy: 0.8907 - Time: 257.79s
+Epoch 8/10 - Loss: 0.2864 - Accuracy: 0.8907 - Time: 258.46s
+Epoch 9/10 - Loss: 0.2666 - Accuracy: 0.9062 - Time: 259.06s
+Epoch 10/10 - Loss: 0.2430 - Accuracy: 0.9086 - Time: 258.60s

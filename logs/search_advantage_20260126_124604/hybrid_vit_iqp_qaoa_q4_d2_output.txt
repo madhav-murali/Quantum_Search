@@ -1,0 +1,12 @@
+Running Experiment: hybrid_vit_iqp_qaoa
+Device: cuda
+Epoch 1/10 - Loss: 2.3692 - Accuracy: 0.1105 - Time: 470.05s
+Epoch 2/10 - Loss: 2.3479 - Accuracy: 0.1105 - Time: 483.55s
+Epoch 3/10 - Loss: 2.3341 - Accuracy: 0.0938 - Time: 469.11s
+Epoch 4/10 - Loss: 2.3207 - Accuracy: 0.1056 - Time: 479.02s
+Epoch 5/10 - Loss: 2.3137 - Accuracy: 0.0710 - Time: 499.72s
+Epoch 6/10 - Loss: 2.3104 - Accuracy: 0.1216 - Time: 498.19s
+Epoch 7/10 - Loss: 2.3056 - Accuracy: 0.1222 - Time: 501.43s
+Epoch 8/10 - Loss: 2.3035 - Accuracy: 0.1173 - Time: 501.74s
+Epoch 9/10 - Loss: 2.2999 - Accuracy: 0.1346 - Time: 500.19s
+Epoch 10/10 - Loss: 2.2987 - Accuracy: 0.0599 - Time: 498.39s

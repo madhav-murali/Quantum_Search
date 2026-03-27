@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+presentation_transcripts.md
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypotheses
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Dataset and Results
+data/*
+!data/.gitignore
+!data/EuroSAT.dvc
+model_checkpoints/
+*.pt
+*.pth
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MLOps
+mlops_runs/
+.env
+
+# DVC
+.dvc/tmp/
+.dvc/cache/
+.dvc/config.local

@@ -1,0 +1,7 @@
+Running Experiment: baseline_vit
+Device: cuda
+Epoch 1/5 - Loss: 1.0417 - Accuracy: 0.7506 - Time: 250.73s
+Epoch 2/5 - Loss: 0.6159 - Accuracy: 0.7802 - Time: 251.09s
+Epoch 3/5 - Loss: 0.4970 - Accuracy: 0.8111 - Time: 253.46s
+Epoch 4/5 - Loss: 0.4200 - Accuracy: 0.8586 - Time: 255.15s
+Epoch 5/5 - Loss: 0.3698 - Accuracy: 0.8796 - Time: 254.51s

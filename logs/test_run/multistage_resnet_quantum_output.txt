@@ -1,0 +1,4 @@
+Running Experiment: multistage_resnet_quantum
+Device: cuda
+Epoch 1/2 - Loss: 2.7482 - Accuracy: 0.2222 - F1: 0.1318 - AUC: 0.6768 - Time: 6.40s
+Epoch 2/2 - Loss: 2.2446 - Accuracy: 0.3580 - F1: 0.2377 - AUC: 0.8121 - Time: 2.35s
