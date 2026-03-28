@@ -35,7 +35,10 @@ class HybridGeoModel(nn.Module):
             if encoding == 'amplitude':
                 q_input_dim = 2**n_qubits
             elif encoding == 'molecular':
-                q_input_dim = 3 * n_qubits
+                q_input_dim = n_qubits * n_qubits
+            elif encoding == 'geospatial_patch':
+                self.patch_features = 2  # you can tune this
+                q_input_dim = n_qubits * self.patch_features
             else:
                 q_input_dim = n_qubits
             
@@ -97,7 +100,6 @@ class HybridGeoModel(nn.Module):
         if self.q_type == 'standard':
             # Apply quantum adapter for dimension matching
             x_adapted = self.quantum_adapter(x_proj)
-            
             # Normalize for amplitude encoding if needed
             if hasattr(self, 'quantum_layer') and hasattr(self.quantum_layer, 'encoding'):
                 if self.quantum_layer.encoding == 'amplitude':

@@ -1,0 +1,13 @@
+Running Experiment: qtl_source_resnet_amplitude | Encoding: molecular | Ansatz: vqc
+Device: cuda
+Epoch 1/10 - Loss: 2.4398 - Accuracy: 0.1458 - F1: 0.0459 - AUC: 0.5940 - Time: 4.87s
+Epoch 2/10 - Loss: 2.3156 - Accuracy: 0.2083 - F1: 0.0622 - AUC: 0.7568 - Time: 1.72s
+Epoch 3/10 - Loss: 2.2520 - Accuracy: 0.2083 - F1: 0.0586 - AUC: 0.7773 - Time: 1.73s
+Epoch 4/10 - Loss: 2.1925 - Accuracy: 0.2500 - F1: 0.1330 - AUC: 0.8033 - Time: 1.84s
+Epoch 5/10 - Loss: 2.1739 - Accuracy: 0.2500 - F1: 0.1274 - AUC: 0.8423 - Time: 1.74s
+Epoch 6/10 - Loss: 2.1382 - Accuracy: 0.2292 - F1: 0.1045 - AUC: 0.8476 - Time: 1.98s
+Epoch 7/10 - Loss: 2.1193 - Accuracy: 0.2500 - F1: 0.1282 - AUC: 0.8446 - Time: 1.76s
+Epoch 8/10 - Loss: 2.1025 - Accuracy: 0.2500 - F1: 0.1210 - AUC: 0.8563 - Time: 1.68s
+Epoch 9/10 - Loss: 2.1134 - Accuracy: 0.2500 - F1: 0.1197 - AUC: 0.8478 - Time: 1.96s
+Epoch 10/10 - Loss: 2.1081 - Accuracy: 0.2500 - F1: 0.1153 - AUC: 0.8494 - Time: 0.93s
+Model checkpoint saved to checkpoints/qtl_source_resnet_amplitude.pth

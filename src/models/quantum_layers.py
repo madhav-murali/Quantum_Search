@@ -62,15 +62,64 @@ class QuantumLayer(nn.Module):
         elif self.encoding == 'iqp':
             # IQP Encoding
             qml.IQPEmbedding(features=inputs, wires=range(self.n_qubits), n_repeats=1)
+        # elif self.encoding == 'molecular':
+        #     # Molecular-inspired encoding: 3 parameters per qubit (RX, RY, RZ) capturing 3D correlations
+        #     for i in range(self.n_qubits):
+        #         if inputs.shape[1] > i:
+        #             qml.RX(inputs[:, i], wires=i)
+        #         if inputs.shape[1] > i + self.n_qubits:
+        #             qml.RY(inputs[:, i + self.n_qubits], wires=i)
+        #         if inputs.shape[1] > i + 2*self.n_qubits:
+        #             qml.RZ(inputs[:, i + 2*self.n_qubits], wires=i)
         elif self.encoding == 'molecular':
-            # Molecular-inspired encoding: 3 parameters per qubit (RX, RY, RZ) capturing 3D correlations
+            """
+            QMSE-style encoding based on hybrid Coulomb-adjacency matrix.
+
+            Expected input:
+                inputs: shape (batch_size, n_qubits, n_qubits)
+                Each sample is a matrix M where:
+                    - M[i, i] → atomic terms (diagonal)
+                    - M[i, j] → bond terms (off-diagonal)
+            """
+
+            batch_size = inputs.shape[0] if len(inputs.shape) > 1 else 1
+            M = inputs.reshape(batch_size, self.n_qubits, self.n_qubits)
+
+            # --- One-qubit rotations (atoms: diagonal elements) ---
             for i in range(self.n_qubits):
-                if inputs.shape[1] > i:
-                    qml.RX(inputs[:, i], wires=i)
-                if inputs.shape[1] > i + self.n_qubits:
-                    qml.RY(inputs[:, i + self.n_qubits], wires=i)
-                if inputs.shape[1] > i + 2*self.n_qubits:
-                    qml.RZ(inputs[:, i + 2*self.n_qubits], wires=i)
+                # Using RY as in paper default
+                qml.RY(M[:, i, i], wires=i)
+
+            # --- Two-qubit rotations (bonds: off-diagonal elements) ---
+            for i in range(self.n_qubits):
+                for j in range(i + 1, self.n_qubits):
+                    # Apply only if bond exists (non-zero)
+                    # You can also remove condition if matrix already sparse
+                    if True:
+                        qml.IsingXX(M[:, i, j], wires=[i, j])
+        elif self.encoding == 'geospatial_patch':
+            """
+            Patch-based encoding for images (EuroSAT-friendly)
+
+            Expected input inside TorchLayer:
+                inputs: (batch_size, n_qubits * patch_features)
+            """
+            batch_size = inputs.shape[0] if len(inputs.shape) > 1 else 1
+            patch_features = inputs.shape[-1] // self.n_qubits
+            P = inputs.reshape(batch_size, self.n_qubits, patch_features)
+
+            # --- Encode patch features ---
+            for i in range(self.n_qubits):
+                # First feature → RY
+                qml.RY(P[:, i, 0], wires=i)
+
+                # Optional second feature → RZ
+                if P.shape[-1] > 1:
+                    qml.RZ(P[:, i, 1], wires=i)
+
+            # --- Local entanglement (spatial structure) ---
+            for i in range(self.n_qubits - 1):
+                qml.IsingXX(0.5, wires=[i, i + 1])
         else:
             raise ValueError(f"Unknown encoding: {self.encoding}")
 

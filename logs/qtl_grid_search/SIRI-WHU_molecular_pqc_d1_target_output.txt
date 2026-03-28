@@ -1,0 +1,2 @@
+Running Experiment: qtl_lenet_finetuned | Encoding: molecular | Ansatz: pqc
+Device: cuda

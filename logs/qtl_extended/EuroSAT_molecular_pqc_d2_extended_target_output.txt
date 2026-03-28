@@ -1,0 +1,5 @@
+Running Experiment: qtl_lenet_finetuned | Encoding: molecular | Ansatz: pqc
+Device: cuda
+Quantum weights loaded from checkpoints/qtl_source_quantum_weights.pth
+Loaded quantum weights from checkpoints/qtl_source_quantum_weights.pth
+Epoch 1/30 - Loss: 2.2617 - Accuracy: 0.1523 - F1: 0.0675 - AUC: 0.6897 - Time: 17.04s

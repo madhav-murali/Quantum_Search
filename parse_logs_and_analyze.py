@@ -162,9 +162,20 @@ def analyze_logs(log_dir):
     print(f"\nPlots saved to {log_path}")
 
 if __name__ == "__main__":
-    # Default to the specific log dir requested
-    target_dir = "logs/search_advantage_20260126_124604"
     if len(sys.argv) > 1:
         target_dir = sys.argv[1]
+    else:
+        log_base = Path("logs")
+        if log_base.exists() and log_base.is_dir():
+            subdirs = [d for d in log_base.iterdir() if d.is_dir()]
+            if subdirs:
+                # find latest modified
+                latest_dir = max(subdirs, key=lambda d: d.stat().st_mtime)
+                target_dir = str(latest_dir)
+                print(f"No specific directory provided. Auto-detected latest run: {target_dir}")
+            else:
+                target_dir = "logs/search_advantage_20260126_124604"
+        else:
+            target_dir = "logs/search_advantage_20260126_124604"
     
     analyze_logs(target_dir)

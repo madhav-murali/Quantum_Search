@@ -481,7 +481,7 @@ if __name__ == '__main__':
     parser.add_argument('--n_qubits', type=int, default=4)
     parser.add_argument('--q_depth', type=int, default=1, help='Number of quantum layers (depth)')
     parser.add_argument('--bands', type=str, default='RGB', choices=['RGB', 'ALL'])
-    parser.add_argument('--encoding', type=str, default=None, choices=['angle', 'amplitude', 'iqp', 'molecular'], help='Override quantum encoding type')
+    parser.add_argument('--encoding', type=str, default=None, choices=['angle', 'amplitude', 'iqp', 'molecular', 'geospatial_patch'], help='Override quantum encoding type')
     parser.add_argument('--ansatz', type=str, default=None, choices=['vqc', 'basic', 'hardware_efficient', 'qaoa', 'pqc'], help='Override quantum ansatz type')
     
     args = parser.parse_args()
